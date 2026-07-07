@@ -1,124 +1,297 @@
-# Smart Inventory & Billing System 🏪
+# 📦 Smart Inventory Management System
 
-A full-featured inventory and billing web app built with **Streamlit** + **PostgreSQL**.
-
----
-
-## Features
-| Module | What you can do |
-|---|---|
-| Dashboard | KPIs, recent sales, low-stock alerts |
-| Customers | Add / Edit / Delete / Search |
-| Products | Add / Edit / Delete, colour-coded stock levels |
-| Sales | Create sale → add items → auto-total → receipt |
-| Analytics | Date-range reports, top products, customer history |
+A Smart Inventory Management System developed using **Python**, **PostgreSQL**, and **SQL** to efficiently manage customers, products, inventory, sales, and billing. The system automates inventory operations, tracks customer purchases, generates sales records, and provides analytical reports for better business decision-making.
 
 ---
 
-## Local Setup (5 minutes)
+# 📖 Problem Statement
 
-### 1. Clone / copy the project
-```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+Small and medium-sized businesses often manage inventory and sales manually, which can lead to:
+
+- Inaccurate inventory records
+- Duplicate customer information
+- Billing errors
+- Difficulty tracking sales history
+- Poor stock management
+- Time-consuming report generation
+
+This project provides a centralized inventory management solution that automates these operations using a relational database.
+
+---
+
+# 🎯 Objectives
+
+- Manage customer information
+- Manage product inventory
+- Generate sales and bills
+- Track inventory stock
+- Store complete sales history
+- Generate sales reports
+- Reduce manual work and human errors
+
+---
+
+# 🚀 Features
+
+## Customer Management
+- Add new customers
+- Update customer information
+- Delete customers
+- Search customers
+- View all customers
+- View customer purchase history
+
+## Product Management
+- Add products
+- Update products
+- Delete products
+- View available inventory
+- Search products
+
+## Sales Management
+- Create sales records
+- Store purchased products
+- Generate bills
+- Calculate total sales
+- View sales history
+
+## Inventory Management
+- Maintain product stock
+- Track available quantity
+- Update inventory after modifications
+
+## Reports & Analytics
+- Total Sales
+- Customer Purchase History
+- Top Selling Products
+- Sales Between Dates
+- Product-wise Sales Reports
+
+---
+
+# 🛠 Technologies Used
+
+- Python
+- PostgreSQL
+- SQL
+- psycopg2
+- Streamlit (UI, if applicable)
+- Git & GitHub
+
+---
+
+# 📂 Project Structure
+
+```text
+Smart-Inventory-System/
+│
+├── app.py
+├── Database.py
+├── customers.py
+├── products.py
+├── sales.py
+├── sales_items.py
+├── requirements.txt
+├── README.md
+└── database.sql
 ```
 
-### 2. Create and activate a virtual environment
+---
+
+# 🗄 Database Schema
+
+## Customers
+
+| Column | Type |
+|--------|------|
+| id | SERIAL PRIMARY KEY |
+| name | VARCHAR |
+| contact | VARCHAR |
+
+---
+
+## Products
+
+| Column | Type |
+|--------|------|
+| id | SERIAL PRIMARY KEY |
+| name | VARCHAR |
+| description | TEXT |
+| price | DECIMAL |
+| quantity | INTEGER |
+
+---
+
+## Sales
+
+| Column | Type |
+|--------|------|
+| id | SERIAL PRIMARY KEY |
+| customer_id | INTEGER |
+| date | DATE |
+| total_amount | DECIMAL |
+
+---
+
+## Sale_Items
+
+| Column | Type |
+|--------|------|
+| id | SERIAL PRIMARY KEY |
+| sale_id | INTEGER |
+| product_id | INTEGER |
+| quantity | INTEGER |
+| price | DECIMAL |
+
+---
+
+# 🧩 Database Relationships
+
+Customers (1) ------ (Many) Sales
+
+Sales (1) ---------- (Many) Sale_Items
+
+Products (1) ------- (Many) Sale_Items
+
+---
+
+# 🔄 Project Workflow
+
+1. Add Customer
+2. Add Products
+3. Create Sale
+4. Select Customer
+5. Select Products
+6. Generate Bill
+7. Store Sale Details
+8. Update Inventory
+9. Generate Reports
+
+---
+
+# 📊 SQL Concepts Used
+
+- CREATE TABLE
+- INSERT
+- SELECT
+- UPDATE
+- DELETE
+- WHERE
+- ORDER BY
+- GROUP BY
+- HAVING
+- Aggregate Functions
+- INNER JOIN
+- Foreign Keys
+- Primary Keys
+
+---
+
+# 📈 Reports Generated
+
+- Customer Purchase History
+- Product Sales Report
+- Top Selling Products
+- Total Revenue
+- Sales Summary
+
+---
+
+# 🔐 Future Improvements
+
+- User Authentication
+- Role-Based Access Control
+- Barcode Scanner Integration
+- Invoice PDF Generation
+- Dashboard with Charts
+- Email Notifications
+- Low Stock Alerts
+- Export Reports to Excel/PDF
+- Cloud Database Integration
+- REST API Support
+
+---
+
+# ⚙ Installation
+
+## Clone Repository
+
 ```bash
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# Mac / Linux
-source venv/bin/activate
+git clone https://github.com/yourusername/Smart-Inventory-System.git
 ```
 
-### 3. Install dependencies
+## Navigate
+
+```bash
+cd Smart-Inventory-System
+```
+
+## Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure the database connection
-Edit `.streamlit/secrets.toml`:
-```toml
-DB_HOST     = "localhost"
-DB_NAME     = "ecommerce"
-DB_USER     = "postgres"
-DB_PASSWORD = "your_password"
-DB_PORT     = "5432"
-DB_SSLMODE  = "disable"
+## Configure PostgreSQL
+
+Create a PostgreSQL database and update your database credentials inside `Database.py`.
+
+## Run Application
+
+```bash
+python app.py
 ```
 
-### 5. Run the app
+or
+
 ```bash
 streamlit run app.py
 ```
-Open your browser at **http://localhost:8501**
+
+(depending on your application)
 
 ---
 
-## Deploy to Streamlit Cloud (Free)
+# 📷 Screenshots
 
-### Step 1 — Push to GitHub
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
-> ⚠️ `.streamlit/secrets.toml` is in `.gitignore` — it will NOT be pushed.
+Add screenshots here.
 
-### Step 2 — Get a cloud PostgreSQL database (free options)
-| Provider | Free tier | SSL |
-|---|---|---|
-| [Supabase](https://supabase.com) | 500 MB | Required |
-| [Neon](https://neon.tech) | 3 GB | Required |
-| [Railway](https://railway.app) | 100 MB | Required |
-| [ElephantSQL](https://www.elephantsql.com) | 20 MB | Optional |
+Example:
 
-After creating your DB, copy the **host, database, user, password, port** values.
-
-### Step 3 — Deploy on Streamlit Cloud
-1. Go to **https://share.streamlit.io** → Sign in with GitHub
-2. Click **New app**
-3. Select your repository, branch (`main`), and set **Main file path** to `app.py`
-4. Click **Advanced settings → Secrets** and paste:
-
-```toml
-DB_HOST     = "your-cloud-db-host"
-DB_NAME     = "your_db_name"
-DB_USER     = "your_db_user"
-DB_PASSWORD = "your_db_password"
-DB_PORT     = "5432"
-DB_SSLMODE  = "require"
-```
-
-5. Click **Deploy!** — your app will be live in ~60 seconds.
+- Login Page
+- Dashboard
+- Customer Module
+- Product Module
+- Billing Module
+- Sales Report
 
 ---
 
-## Project Structure
-```
-├── app.py              ← Streamlit UI (main entry point)
-├── Database.py         ← Connection pool via st.cache_resource
-├── customers.py        ← Customer CRUD
-├── products.py         ← Product CRUD
-├── sales.py            ← Sale operations + analytics
-├── sales_items.py      ← Line-item operations
-├── requirements.txt
-├── .gitignore
-└── .streamlit/
-    ├── secrets.toml    ← DB credentials (local only, not in Git)
-    └── config.toml     ← Theme and server settings
-```
+# 💡 Learning Outcomes
+
+Through this project, I gained practical experience in:
+
+- Database Design
+- SQL Query Writing
+- CRUD Operations
+- Relational Database Management
+- PostgreSQL Integration with Python
+- Inventory Management Logic
+- Sales Analytics
+- Data Modeling
 
 ---
 
-## Common Issues
+# 👨‍💻 Author
 
-| Problem | Fix |
-|---|---|
-| `connection failed` | Check secrets.toml credentials and that Postgres is running |
-| `SSL required` | Set `DB_SSLMODE = "require"` for cloud DBs |
-| Tables not created | The app auto-creates tables on first load via `CREATE TABLE IF NOT EXISTS` |
-| `psycopg2` error on M1 Mac | Use `pip install psycopg2-binary` (already in requirements.txt) |
+**Prashant Kumar**
+
+Computer Science & Engineering (Cyber Security)
+
+Python | SQL | PostgreSQL | Data Analytics | MERN Stack
+
+---
+
+# ⭐ If you like this project
+
+Please consider giving it a ⭐ on GitHub.
