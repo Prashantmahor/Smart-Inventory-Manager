@@ -2,7 +2,7 @@
 Smart Inventory & Billing System
 Streamlit front-end — deployment-ready
 """
-from Database import conn
+from Database import get_connection, init_db, fetch_one, fetch_all, execute_query
 import streamlit as st
 import pandas as pd
 from datetime import date
