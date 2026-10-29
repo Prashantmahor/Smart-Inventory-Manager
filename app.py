@@ -5,7 +5,7 @@ Streamlit front-end — deployment-ready
 import pandas as pd
 from datetime import date
 
-from Database import get_connection,conn
+from Database import conn
 from customers import Customer
 from products import Product
 from sales import Sale
