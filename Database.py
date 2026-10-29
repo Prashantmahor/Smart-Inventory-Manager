@@ -20,8 +20,7 @@ def get_connection():
     except Exception as e:
         st.error(f"❌ Database connection failed: {e}")
         st.stop()
-
-  conn = get_connection()
+conn = get_connection()
 
 
 # import psycopg2
