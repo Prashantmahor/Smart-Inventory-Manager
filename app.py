@@ -2,6 +2,8 @@
 Smart Inventory & Billing System
 Streamlit front-end — deployment-ready
 """
+
+import streamlit as st
 import pandas as pd
 from datetime import date
 
